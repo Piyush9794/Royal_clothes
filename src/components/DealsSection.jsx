@@ -14,21 +14,13 @@ export default function DealsSection({
   onOpenQueryModal
 }) {
   return (
-    <section
-      id="deals-section"
-      className="relative w-full overflow-hidden  py-2"
-    >
+    <section className="relative w-full overflow-hidden py-5">
 
-
-
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 space-y-2 ">
-
-
-
+      {/* ================= CONTENT CONTAINER ================= */}
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
 
         {/* ================= HEADER ================= */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
-
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-4">
 
           <div className="space-y-1">
             <div className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-[#ea4c89] font-mono-tag">
@@ -58,7 +50,7 @@ export default function DealsSection({
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.05 }}
-            className=" grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 lg:gap-6 w-full  "
+            className="grid w-full grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 lg:gap-6"
           >
             {dealProducts.map((product) => (
               <ProductCard
@@ -90,7 +82,8 @@ export default function DealsSection({
             </h3>
 
             <p className="mx-auto mt-2 max-w-md text-xs sm:text-sm text-gray-500 leading-relaxed">
-              Our showroom team is preparing exclusive festival and clearance offers. Explore our entire catalog in the meantime!
+              Our showroom team is preparing exclusive festival and clearance offers.
+              Explore our entire catalog in the meantime!
             </p>
 
             <button
@@ -102,7 +95,8 @@ export default function DealsSection({
             </button>
           </motion.div>
         )}
+
       </div>
-    </section >
+    </section>
   );
 }
