@@ -16,7 +16,7 @@ export default function DealsSection({
   return (
     <section
       id="deals-section"
-      className="relative w-full overflow-hidden border-4    py-2"
+      className="relative w-full overflow-hidden  py-2"
     >
 
 
