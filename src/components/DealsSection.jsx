@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Sparkles, Flame, Clock, ArrowRight } from 'lucide-react';
 import ProductCard from './ProductCard';
 import { variants, staggerContainer } from '../utils/animations';
+//import DealsHeader from './DealsHeader';
 
 export default function DealsSection({
   dealProducts = [],
@@ -15,33 +16,9 @@ export default function DealsSection({
 }) {
   return (
     <section className="relative w-full overflow-hidden py-5">
+      <div className="mx-auto w-full max-w-7xl   px-4 sm:px-6 lg:px-8">
 
-      {/* ================= CONTENT CONTAINER ================= */}
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        {/* ================= HEADER ================= */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-4">
-
-          <div className="space-y-1">
-            <div className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-[#ea4c89] font-mono-tag">
-              <Flame className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0 text-[#ea4c89]" />
-              <span>SPECIAL PROMOTIONS & DISCOUNTS</span>
-            </div>
-
-            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#0d0c22] font-serif-title">
-              Deals In Store
-            </h2>
-
-            <p className="text-xs sm:text-sm text-gray-500">
-              Limited-time markdown prices on authentic Royal Collection Lucknow styles.
-            </p>
-          </div>
-
-          <span className="hidden sm:inline-flex shrink-0 items-center gap-1.5 rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs text-gray-500 shadow-sm font-mono-tag">
-            <Clock className="h-3.5 w-3.5 text-[#ea4c89]" />
-            Updated Daily
-          </span>
-        </div>
 
         {/* ================= PRODUCTS GRID ================= */}
         {dealProducts.length > 0 ? (
@@ -50,7 +27,7 @@ export default function DealsSection({
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.05 }}
-            className="grid w-full grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 lg:gap-6"
+            className="ml-0 grid w-full grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 lg:gap-6"
           >
             {dealProducts.map((product) => (
               <ProductCard
@@ -65,13 +42,12 @@ export default function DealsSection({
             ))}
           </motion.div>
         ) : (
-          /* ================= EMPTY STATE ================= */
           <motion.div
             variants={variants["zoom-in"]}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
-            className="mx-auto w-full max-w-2xl rounded-2xl border border-[#f3f3f4] bg-white p-6 text-center shadow-lg sm:p-10 md:p-12"
+            className="ml-0 w-full max-w-2xl rounded-2xl border border-[#f3f3f4] bg-white p-6 text-center shadow-lg sm:p-10 md:p-12"
           >
             <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#ea4c89]/10 text-[#ea4c89]">
               <Sparkles className="h-6 w-6" />
@@ -81,7 +57,7 @@ export default function DealsSection({
               New Seasonal Deals Dropping Soon
             </h3>
 
-            <p className="mx-auto mt-2 max-w-md text-xs sm:text-sm text-gray-500 leading-relaxed">
+            <p className="mx-auto mt-2 max-w-md text-xs leading-relaxed text-gray-500 sm:text-sm">
               Our showroom team is preparing exclusive festival and clearance offers.
               Explore our entire catalog in the meantime!
             </p>
@@ -95,8 +71,8 @@ export default function DealsSection({
             </button>
           </motion.div>
         )}
-
       </div>
     </section>
+
   );
 }

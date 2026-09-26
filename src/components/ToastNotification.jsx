@@ -19,7 +19,7 @@ export default function ToastNotification({ toast, onDismiss }) {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.9 }}
           transition={{ duration: 0.25, ease: 'easeOut' }}
-          className="fixed bottom-5 right-5 z-50 max-w-sm w-full p-4 rounded-xl shadow-2xl border flex items-start gap-3 bg-[#0d0c22] text-white border-[#2b2759]"
+          className="fixed top-5 right-5 z-50 max-w-sm w-full p-4 rounded-xl shadow-2xl border flex items-start gap-3 bg-[#0d0c22] text-white border-[#2b2759]"
         >
           {toast.type === 'error' ? (
             <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />

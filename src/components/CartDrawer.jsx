@@ -1,12 +1,15 @@
-import React from 'react';
+
+import React, { useState, useEffect } from 'react';
+
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  X, 
-  Trash2, 
-  ShoppingBag, 
-  ArrowRight, 
-  ShieldCheck, 
-  MessageCircle, 
+import {
+  X,
+  Trash2,
+  ShoppingBag,
+  ArrowRight,
+  ShieldCheck,
+  MessageCircle,
+  CheckCircle2,
   Phone,
   Store,
   Sparkles
@@ -22,6 +25,20 @@ export default function CartDrawer({
   onClearCart,
   onShopClick
 }) {
+  const [paymentDone, setPaymentDone] = useState(false);
+
+  useEffect(() => {
+    // Cart empty hone par payment status reset
+    if (cart.length === 0) {
+      setPaymentDone(false);
+    }
+  }, [cart.length]);
+
+  useEffect(() => {
+    // Cart change hone par payment status reset
+    setPaymentDone(false);
+  }, [cart]);
+
   const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
   const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
 
@@ -169,7 +186,7 @@ export default function CartDrawer({
                               <Trash2 className="w-3.5 h-3.5" />
                             </button>
                           </div>
-                          
+
                           <p className="text-[10px] text-gray-500 font-mono-tag mt-0.5">
                             Size: <span className="font-semibold text-gray-800">{item.size}</span> | Style: <span className="font-semibold text-gray-800">{item.color}</span>
                           </p>
@@ -211,7 +228,7 @@ export default function CartDrawer({
             {/* Footer Summary & Order CTA */}
             {cart.length > 0 && (
               <div className="p-4 sm:p-5 border-t border-gray-100 bg-[#fdfcfb] space-y-3">
-                
+
                 {/* Policy Notice */}
                 <div className="p-2.5 rounded-lg bg-amber-50 border border-amber-200/60 text-[10px] text-amber-900 flex items-start gap-1.5">
                   <ShieldCheck className="w-3.5 h-3.5 text-[#ea4c89] shrink-0 mt-0.5" />
@@ -233,6 +250,23 @@ export default function CartDrawer({
                     </span>
                   </div>
                 </div>
+                {/* Pay Now */}
+                <button
+                  onClick={() => setPaymentDone(true)}
+                  className="w-full py-3.5 px-4 rounded-full bg-[#0d0c22] hover:bg-[#1b1938] text-white text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-lg transition-all"
+                >
+                  {paymentDone ? (
+                    <>
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                      <span>Payment Done</span>
+                    </>
+                  ) : (
+                    <>
+                      <ShieldCheck className="w-4 h-4" />
+                      <span>Pay Now ₹{subtotal.toLocaleString('en-IN')}</span>
+                    </>
+                  )}
+                </button>
 
                 {/* WhatsApp Instant Store Order */}
                 <button

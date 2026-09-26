@@ -18,19 +18,19 @@ export default function ProductFilters({
   onResetFilters,
   searchInputRef
 }) {
-  const hasActiveFilters = 
-    searchTerm.trim() !== '' || 
-    selectedCategory !== 'all' || 
-    onlyDeals || 
+  const hasActiveFilters =
+    searchTerm.trim() !== '' ||
+    selectedCategory !== 'all' ||
+    onlyDeals ||
     filterBadge !== 'ALL' ||
     sortBy !== 'featured';
 
   return (
     <div className="space-y-4 mb-6">
-      
+
       {/* Top Search & Main Controls Bar */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-        
+
         {/* Search Input */}
         <div className="relative flex-1">
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -55,15 +55,14 @@ export default function ProductFilters({
 
         {/* Sort & Deal Filters */}
         <div className="flex items-center gap-2">
-          
+
           {/* Deals Only Toggle */}
           <button
             onClick={onToggleDeals}
-            className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-full text-xs font-semibold border transition-all ${
-              onlyDeals 
-                ? 'bg-[#ea4c89] text-white border-[#ea4c89] shadow-md shadow-[#ea4c89]/20' 
+            className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-full text-xs font-semibold border transition-all ${onlyDeals
+                ? 'bg-[#ea4c89] text-white border-[#ea4c89] shadow-md shadow-[#ea4c89]/20'
                 : 'bg-white text-gray-700 border-gray-200 hover:border-gray-900'
-            }`}
+              }`}
           >
             <Tag className="w-3.5 h-3.5" />
             <span>Only Deals</span>
@@ -96,11 +95,10 @@ export default function ProductFilters({
             <button
               key={cat.id}
               onClick={() => onSelectCategory(cat.slug)}
-              className={`whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 shrink-0 ${
-                isActive
+              className={`whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 shrink-0 ${isActive
                   ? 'bg-[#0d0c22] text-white font-semibold shadow-sm'
                   : 'bg-white text-gray-600 border border-gray-200 hover:border-gray-400 hover:text-[#0d0c22]'
-              }`}
+                }`}
             >
               {cat.name}
             </button>
@@ -140,9 +138,9 @@ export default function ProductFilters({
             <X className="w-3 h-3" />
             Reset all filters
           </button>
+
         )}
       </div>
-
     </div>
   );
 }

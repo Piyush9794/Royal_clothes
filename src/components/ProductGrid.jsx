@@ -4,6 +4,7 @@ import { PackageOpen, Sparkles, RefreshCw } from 'lucide-react';
 import ProductCard from './ProductCard';
 import { staggerContainer } from '../utils/animations';
 
+
 export default function ProductGrid({
   products,
   onAddToCart,
@@ -81,6 +82,8 @@ export default function ProductGrid({
           />
         ))}
       </motion.div>
+
+
     </div>
   );
 }

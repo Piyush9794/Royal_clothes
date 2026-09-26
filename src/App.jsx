@@ -21,6 +21,7 @@ import ToastNotification from './components/ToastNotification';
 import OwnerDashboard from './admin/OwnerDashboard';
 import { useProducts } from './hooks/useProducts';
 
+
 export default function App() {
   const {
     products,
@@ -271,6 +272,8 @@ export default function App() {
                 searchInputRef={searchInputRef}
               />
 
+
+
               {/* Product Grid */}
               <ProductGrid
                 products={filteredProducts}
@@ -298,15 +301,15 @@ export default function App() {
           </main>
 
           {/* Deals In Store Section */}
-          <DealsSection
+          {/* <DealsSection
             dealProducts={dealProducts}
             onAddToCart={(product, size, color, qty) => addToCart(product, size, color, qty)}
             onOpenModal={(product) => setSelectedProductForModal(product)}
             wishlist={wishlist}
             onToggleWishlist={toggleWishlist}
             onShopClick={() => scrollToSection('shop')}
-            onOpenQueryModal={() => setIsQueryModalOpen(true)}
-          />
+            onOpenQueryModal={() => setIsQueryModalOpen(true)} 
+          />  */}
 
           {/* Lucknow Section & Shopping Bag Heritage Reference */}
           <LucknowSection onShopClick={() => scrollToSection('shop')} />
