@@ -16,8 +16,9 @@ export const CATEGORIES = [
     icon: 'Scissors',
     tagline: 'Denim Perfection',
     description: 'Straight, slim, distressed & raw selvedge denim collection.',
-    image: 'https://images.unsplash.com/photo-1542272604-780c96856592?auto=format&fit=crop&w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=800&auto=format&fit=crop&q=60',
     count: 8
+
   },
   {
     id: 'shirts',

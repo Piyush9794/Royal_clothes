@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Heart, ShoppingBag, Eye } from 'lucide-react';
+import { Heart, ShoppingBag, Eye, MessageCircle } from 'lucide-react';
 import { FALLBACK_BAG_IMAGE } from '../services/imageService';
 import { variants } from '../utils/animations';
 
@@ -9,7 +9,8 @@ export default function ProductCard({
   onAddToCart,
   onOpenModal,
   isWishlisted,
-  onToggleWishlist
+  onToggleWishlist,
+  onOpenQueryModal
 }) {
   const hasDiscount = product.salePrice && product.salePrice < product.price;
   const discountPercent = hasDiscount
@@ -27,7 +28,7 @@ export default function ProductCard({
       className="group relative bg-white border border-[#f3f3f4] rounded-xl overflow-hidden flex flex-col justify-between transition-shadow duration-300 shadow-[0px_4px_20px_0px_rgba(27,32,50,0.06)] hover:shadow-[0px_12px_30px_0px_rgba(234,76,137,0.12)] hover:border-[#ea4c89]/30 h-full w-full"
     >
       {/* Top Media Container */}
-      <div 
+      <div
         className="relative aspect-[3/4] w-full overflow-hidden bg-gray-50 cursor-pointer"
         onClick={() => onOpenModal(product)}
       >
@@ -66,11 +67,10 @@ export default function ProductCard({
             e.stopPropagation();
             onToggleWishlist(product.id);
           }}
-          className={`absolute top-2 right-2 z-10 w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center transition-all shadow-sm ${
-            isWishlisted
-              ? 'bg-[#ea4c89] text-white'
-              : 'bg-white/90 text-gray-700 hover:text-[#ea4c89] hover:bg-white'
-          }`}
+          className={`absolute top-2 right-2 z-10 w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center transition-all shadow-sm ${isWishlisted
+            ? 'bg-[#ea4c89] text-white'
+            : 'bg-white/90 text-gray-700 hover:text-[#ea4c89] hover:bg-white'
+            }`}
           aria-label={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
         >
           <Heart className={`w-3 h-3 sm:w-3.5 sm:h-3.5 ${isWishlisted ? 'fill-white' : ''}`} />
@@ -107,7 +107,7 @@ export default function ProductCard({
           </div>
 
           {/* Product Name (2 lines to prevent cut-off) */}
-          <h3 
+          <h3
             onClick={() => onOpenModal(product)}
             className="text-[12px] sm:text-sm font-bold text-[#0d0c22] line-clamp-2 leading-snug group-hover:text-[#ea4c89] transition-colors cursor-pointer min-h-[1.8rem] sm:min-h-[2.2rem]"
             title={product.name}
@@ -136,23 +136,40 @@ export default function ProductCard({
             )}
           </div>
 
-          {/* Add Button: perfectly sized circular/pill button */}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              onAddToCart(product);
-            }}
-            disabled={product.stock === 0}
-            className={`w-7 h-7 sm:w-auto sm:px-2.5 sm:py-1 rounded-full bg-[#ea4c89] hover:bg-[#d93d79] text-white flex items-center justify-center gap-1 shrink-0 shadow-sm transition-all active:scale-95 ${
-              product.stock === 0 ? 'opacity-50 cursor-not-allowed bg-gray-400' : ''
-            }`}
-            aria-label={`Add ${product.name} to shopping bag`}
-            title="Add to Shopping Bag"
-          >
-            <ShoppingBag className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-            <span className="hidden sm:inline text-[11px] font-semibold">Add</span>
-          </button>
+          {/* Action Buttons */}
+          <div className="flex items-center gap-1 shrink-0">
+            {/* Customer Query Button */}
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onOpenQueryModal && onOpenQueryModal();
+              }}
+              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#0d0c22] hover:bg-[#3e34d3] text-white flex items-center justify-center shadow-sm transition-all active:scale-95"
+              aria-label="Ask a query about this product"
+              title="Ask Store Query"
+            >
+              <MessageCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+            </button>
+
+            {/* Add to Bag Button */}
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onAddToCart(product);
+              }}
+              disabled={product.stock === 0}
+              className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shadow-sm transition-all active:scale-95 ${product.stock === 0
+                ? 'bg-gray-300 text-gray-400 cursor-not-allowed opacity-60'
+                : 'bg-[#0d0c22] hover:bg-[#3e34d3] text-[#ea4c89]'
+                }`}
+              aria-label={`Add ${product.name} to shopping bag`}
+              title="Add to Shopping Bag"
+            >
+              <ShoppingBag className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+            </button>
+          </div>
         </div>
       </div>
     </motion.div>

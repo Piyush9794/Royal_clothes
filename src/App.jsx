@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquarePlus, HelpCircle } from 'lucide-react';
+import { MessageSquarePlus, HelpCircle, ShoppingBag } from 'lucide-react';
 import AnnouncementBar from './components/AnnouncementBar';
 import Navbar from './components/Navbar';
 import MobileMenu from './components/MobileMenu';
@@ -111,7 +111,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#fdfcfb] text-[#0d0c22] flex flex-col selection:bg-[#ea4c89] selection:text-white font-sans antialiased overflow-x-hidden">
-      
+
       {/* Branded Initial Page Loader */}
       {isInitialLoading && <Loader text="Loading Royal Collection Lucknow..." />}
 
@@ -125,21 +125,68 @@ export default function App() {
         onQuerySubmitted={(msg) => showToast(msg)}
       />
 
-      {/* Floating Ask Query / Help Button */}
+      {/* Floating Customer Query Pill — Bottom Left */}
+      {!isAdminOpen && (
+        <motion.div
+          initial={{ scale: 0, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          transition={{ delay: 1, type: 'spring', stiffness: 300, damping: 20 }}
+          className="fixed bottom-5 left-5 z-40 flex items-center gap-0 bg-[#0d0c22] rounded-full shadow-2xl border border-[#807ea399]/30 backdrop-blur-md overflow-hidden"
+        >
+          {/* Pulse Dot */}
+          <div className="pl-3 pr-1 flex items-center">
+            <div className="w-2 h-2 rounded-full bg-[#ea4c89] animate-pulse" />
+          </div>
+
+          {/* Customer Query Button */}
+          <motion.button
+            whileHover={{ backgroundColor: 'rgba(62,52,211,0.3)' }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => setIsQueryModalOpen(true)}
+            className="relative flex items-center justify-center w-9 h-9 text-[#ea4c89] transition-colors"
+            aria-label="Open Customer Query Help Desk"
+            title="Ask Store Query"
+          >
+            <MessageSquarePlus className="w-4 h-4" />
+          </motion.button>
+
+          {/* Right padding */}
+          <div className="pr-1" />
+        </motion.div>
+      )}
+
+      {/* Floating Shopping Bag Button — Bottom Right */}
       {!isAdminOpen && (
         <motion.button
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 1 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => setIsQueryModalOpen(true)}
-          className="fixed bottom-5 left-5 z-40 bg-[#0d0c22] text-white hover:bg-[#3e34d3] px-3.5 py-2.5 rounded-full shadow-xl border border-[#807ea399]/30 flex items-center gap-2 text-xs font-semibold backdrop-blur-md transition-all group"
-          aria-label="Open Customer Query Help Desk"
+          initial={{ scale: 0, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          transition={{ delay: 1.1, type: 'spring', stiffness: 300, damping: 20 }}
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.92 }}
+          onClick={() => setIsCartOpen(true)}
+          className="fixed bottom-5 right-5 z-40 w-12 h-12 bg-[#0d0c22] rounded-full shadow-2xl border border-[#807ea399]/30 backdrop-blur-md flex items-center justify-center text-[#ea4c89] transition-colors hover:bg-[#3e34d3]"
+          aria-label="Open Shopping Bag"
+          title="View Shopping Bag"
         >
-          <div className="w-2 h-2 rounded-full bg-[#ea4c89] animate-pulse" />
-          <MessageSquarePlus className="w-4 h-4 text-[#ea4c89] group-hover:rotate-12 transition-transform" />
-          <span className="hidden xs:inline">Ask Store Query</span>
+          <motion.div
+            key={cart.reduce((s, i) => s + i.quantity, 0)}
+            initial={cart.length > 0 ? { scale: 1.4, rotate: -15 } : { scale: 1 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 12 }}
+          >
+            <ShoppingBag className="w-5 h-5" />
+          </motion.div>
+          {cart.reduce((s, i) => s + i.quantity, 0) > 0 && (
+            <motion.span
+              key={`fab-badge-${cart.reduce((s, i) => s + i.quantity, 0)}`}
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: 'spring', stiffness: 500, damping: 15 }}
+              className="absolute -top-1 -right-1 min-w-[18px] h-[18px] rounded-full bg-[#ea4c89] text-white text-[9px] font-bold flex items-center justify-center px-1 shadow-sm"
+            >
+              {cart.reduce((s, i) => s + i.quantity, 0)}
+            </motion.span>
+          )}
         </motion.button>
       )}
 
@@ -169,6 +216,7 @@ export default function App() {
             onNavigate={scrollToSection}
             onOpenMobileMenu={() => setIsMobileMenuOpen(true)}
             onSearchFocus={handleSearchFocus}
+            onOpenQueryModal={() => setIsQueryModalOpen(true)}
           />
 
           {/* Mobile Drawer Menu */}
@@ -203,9 +251,9 @@ export default function App() {
           />
 
           {/* Main Customer Storefront & Catalog */}
-          <main ref={shopSectionRef} id="shop-section" className="py-12 sm:py-16 lg:py-20 bg-[#fdfcfb] border-b border-gray-100">
+          <main ref={shopSectionRef} id="shop-section" className="py-6 sm:py-8 lg:py-10 bg-[#fdfcfb] border-b border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              
+
               {/* Product Filtering & Search */}
               <ProductFilters
                 searchTerm={searchTerm}
@@ -231,12 +279,13 @@ export default function App() {
                 wishlist={wishlist}
                 onToggleWishlist={toggleWishlist}
                 onResetFilters={handleResetAllFilters}
+                onOpenQueryModal={() => setIsQueryModalOpen(true)}
                 title={
                   selectedCategory !== 'all'
                     ? `${selectedCategory} Collection`
                     : onlyDeals
-                    ? 'Exclusive Deals In Store'
-                    : 'Featured Collection'
+                      ? 'Exclusive Deals In Store'
+                      : 'Featured Collection'
                 }
                 subtitle={
                   searchTerm
@@ -256,6 +305,7 @@ export default function App() {
             wishlist={wishlist}
             onToggleWishlist={toggleWishlist}
             onShopClick={() => scrollToSection('shop')}
+            onOpenQueryModal={() => setIsQueryModalOpen(true)}
           />
 
           {/* Lucknow Section & Shopping Bag Heritage Reference */}

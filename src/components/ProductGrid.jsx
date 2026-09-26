@@ -11,6 +11,7 @@ export default function ProductGrid({
   wishlist = [],
   onToggleWishlist,
   onResetFilters,
+  onOpenQueryModal,
   title = "Featured Collection",
   subtitle = "Handpicked menswear and streetwear ready for Lucknow style."
 }) {
@@ -66,7 +67,7 @@ export default function ProductGrid({
         initial="hidden"
         whileInView="visible"
         viewport={{ once: false, amount: 0.05 }}
-        className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-6 w-full"
+        className="grid grid-cols-2 gap-3  md:grid-cols-3 lg:grid-cols-4 lg:gap-6 w-full"
       >
         {products.map((product) => (
           <ProductCard
@@ -76,6 +77,7 @@ export default function ProductGrid({
             onOpenModal={onOpenModal}
             isWishlisted={wishlist.includes(product.id)}
             onToggleWishlist={onToggleWishlist}
+            onOpenQueryModal={onOpenQueryModal}
           />
         ))}
       </motion.div>

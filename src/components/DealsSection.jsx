@@ -10,28 +10,26 @@ export default function DealsSection({
   onOpenModal,
   wishlist = [],
   onToggleWishlist,
-  onShopClick
+  onShopClick,
+  onOpenQueryModal
 }) {
   return (
     <section
       id="deals-section"
-      className="relative w-full overflow-hidden border-b border-gray-100 bg-gradient-to-b from-[#fdfcfb] to-[#f5f4f8] py-12 sm:py-16 lg:py-20"
+      className="relative w-full overflow-hidden border-4    py-2"
     >
-      {/* Background Accent */}
-      <div
-        className="pointer-events-none absolute -right-24 top-10 h-64 w-64 rounded-full bg-[#ea4c89]/5 blur-3xl sm:-right-10 sm:h-80 sm:w-80"
-      />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6">
-        
+
+
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 space-y-2 ">
+
+
+
+
         {/* ================= HEADER ================= */}
-        <motion.div
-          variants={variants["fade-down"]}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.15 }}
-          className="flex flex-col sm:flex-row sm:items-end justify-between gap-2"
-        >
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+
+
           <div className="space-y-1">
             <div className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-[#ea4c89] font-mono-tag">
               <Flame className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0 text-[#ea4c89]" />
@@ -51,7 +49,7 @@ export default function DealsSection({
             <Clock className="h-3.5 w-3.5 text-[#ea4c89]" />
             Updated Daily
           </span>
-        </motion.div>
+        </div>
 
         {/* ================= PRODUCTS GRID ================= */}
         {dealProducts.length > 0 ? (
@@ -60,7 +58,7 @@ export default function DealsSection({
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.05 }}
-            className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-6 w-full"
+            className=" grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 lg:gap-6 w-full  "
           >
             {dealProducts.map((product) => (
               <ProductCard
@@ -70,6 +68,7 @@ export default function DealsSection({
                 onOpenModal={onOpenModal}
                 isWishlisted={wishlist.includes(product.id)}
                 onToggleWishlist={onToggleWishlist}
+                onOpenQueryModal={onOpenQueryModal}
               />
             ))}
           </motion.div>
@@ -104,6 +103,6 @@ export default function DealsSection({
           </motion.div>
         )}
       </div>
-    </section>
+    </section >
   );
 }

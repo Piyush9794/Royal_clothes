@@ -148,15 +148,28 @@ export default function Navbar({
           {/* Cart Trigger */}
           <button
             onClick={onOpenCart}
-            className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-gray-200/80 bg-gray-50 flex items-center justify-center text-gray-700 hover:text-[#ea4c89] hover:border-[#ea4c89]/40 hover:bg-[#ea4c89]/5 transition-all"
+            className={`relative w-9 h-9 sm:w-10 sm:h-10 rounded-full border flex items-center justify-center transition-all duration-300 ${
+              cartCount > 0
+                ? 'border-[#ea4c89]/50 bg-[#ea4c89]/10 text-[#ea4c89]'
+                : 'border-gray-200/80 bg-gray-50 text-gray-700 hover:text-[#ea4c89] hover:border-[#ea4c89]/40 hover:bg-[#ea4c89]/5'
+            }`}
             aria-label={`Shopping bag with ${cartCount} items`}
             title="View Shopping Bag"
           >
-            <ShoppingBag className="w-4 h-4" />
+            <motion.div
+              key={cartCount}
+              initial={cartCount > 0 ? { scale: 1.4, rotate: -15 } : { scale: 1 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 12 }}
+            >
+              <ShoppingBag className="w-4 h-4" />
+            </motion.div>
             {cartCount > 0 && (
               <motion.span
+                key={`badge-${cartCount}`}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
+                transition={{ type: 'spring', stiffness: 500, damping: 15 }}
                 className="absolute -top-1 -right-1 min-w-[18px] h-[18px] rounded-full bg-[#ea4c89] text-white text-[10px] font-bold flex items-center justify-center px-1 shadow-sm"
               >
                 {cartCount}
