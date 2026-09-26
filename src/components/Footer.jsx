@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Phone, 
-  MapPin, 
-  ShieldCheck, 
-  ArrowUp, 
+import {
+  Phone,
+  MapPin,
+  ShieldCheck,
+  ArrowUp,
   LayoutDashboard,
   Heart,
   ExternalLink
@@ -13,10 +13,10 @@ import { InstagramIcon } from './Icons';
 import { CATEGORIES } from '../data/categories';
 import { upReveal } from '../utils/animations';
 
-export default function Footer({ 
-  onNavigate, 
-  onSelectCategory, 
-  onOpenAdmin 
+export default function Footer({
+  onNavigate,
+  onSelectCategory,
+  onOpenAdmin
 }) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -25,7 +25,7 @@ export default function Footer({
   return (
     <footer className="bg-[#060318] text-white pt-14 pb-10 border-t border-[#1a1836]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         <motion.div
           variants={upReveal}
           initial="hidden"
@@ -72,48 +72,48 @@ export default function Footer({
             </h4>
             <ul className="space-y-2 text-xs text-gray-400">
               <li>
-                <button 
-                  onClick={() => onNavigate('home')} 
+                <button
+                  onClick={() => onNavigate('home')}
                   className="hover:text-[#ea4c89] transition-colors"
                 >
                   Home Showcase
                 </button>
               </li>
               <li>
-                <button 
-                  onClick={() => onNavigate('shop')} 
+                <button
+                  onClick={() => onNavigate('shop')}
                   className="hover:text-[#ea4c89] transition-colors"
                 >
                   All Products
                 </button>
               </li>
               <li>
-                <button 
-                  onClick={() => onNavigate('deals')} 
+                <button
+                  onClick={() => onNavigate('deals')}
                   className="hover:text-[#ea4c89] transition-colors text-gray-300 font-medium"
                 >
                   Deals & Offers
                 </button>
               </li>
               <li>
-                <button 
-                  onClick={() => onNavigate('about')} 
+                <button
+                  onClick={() => onNavigate('about')}
                   className="hover:text-[#ea4c89] transition-colors"
                 >
                   Lucknow Story
                 </button>
               </li>
               <li>
-                <button 
-                  onClick={() => onNavigate('store')} 
+                <button
+                  onClick={() => onNavigate('store')}
                   className="hover:text-[#ea4c89] transition-colors"
                 >
                   Visit Store
                 </button>
               </li>
               <li>
-                <button 
-                  onClick={onOpenAdmin} 
+                <button
+                  onClick={onOpenAdmin}
                   className="hover:text-[#ea4c89] transition-colors text-gray-300 flex items-center gap-1 mt-2"
                 >
                   <LayoutDashboard className="w-3 h-3 text-[#ea4c89]" />
@@ -145,10 +145,12 @@ export default function Footer({
           </div>
 
           {/* Column 4: Contact & Address (3 cols) */}
-          <div className="lg:col-span-3 space-y-3">
+          {/* Column 4: Contact & Address (3 cols) */}
+          <div className="lg:col-span-3 space-y-4">
             <h4 className="text-xs font-mono-tag font-bold uppercase tracking-wider text-gray-300">
               Store Contact
             </h4>
+
             <div className="space-y-2.5 text-xs text-gray-400">
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-[#ea4c89] shrink-0 mt-0.5" />
@@ -160,10 +162,16 @@ export default function Footer({
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-[#ea4c89] shrink-0" />
                 <div className="flex flex-col">
-                  <a href="tel:7007326371" className="hover:text-white transition-colors font-mono-tag">
+                  <a
+                    href="tel:7007326371"
+                    className="hover:text-white transition-colors font-mono-tag"
+                  >
                     +91 7007326371
                   </a>
-                  <a href="tel:8574553890" className="hover:text-white transition-colors font-mono-tag">
+                  <a
+                    href="tel:8574553890"
+                    className="hover:text-white transition-colors font-mono-tag"
+                  >
                     +91 8574553890
                   </a>
                 </div>
@@ -181,7 +189,22 @@ export default function Footer({
                 </a>
               </div>
             </div>
+
+            {/* Responsive Google Map */}
+            <div className="mt-4 overflow-hidden rounded-xl border border-[#232145] bg-[#0d0c22] shadow-lg shadow-black/20">
+              <div className="relative w-full aspect-[16/10] sm:aspect-[16/8] lg:aspect-[16/10]">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3381.6486996758026!2d80.9323139!3d26.9136577!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3999564efc8883f1%3A0x6e27c348b1c92202!2sROYAL%20COLLECTION%20%7C%20Readymade%20Men's%20Wear%20and%20Apparel%20Store!5e1!3m2!1sen!2sin!4v1790408973430!5m2!1sen!2sin"
+                  title="Royal Collection Lucknow Location"
+                  className="absolute inset-0 w-full h-full border-0"
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="strict-origin-when-cross-origin"
+                />
+              </div>
+            </div>
           </div>
+
 
         </motion.div>
 
